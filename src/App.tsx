@@ -8,7 +8,7 @@ import { Solutions } from '@/components/Solutions';
 import { Resources } from '@/components/Resources';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
-
+import StewardFlow from '@/components/steward-flow/StewardFlow';
 function App() {
   useReveal();
 
@@ -19,6 +19,12 @@ function App() {
       <main>
         <Hero />
         <Services />
+        
+        {/* Steward Flow Micro-SaaS Tool Section */}
+        <section id="steward-flow" className="py-12">
+          <StewardFlow />
+        </section>
+
         <Biosecurity />
         <Solutions />
         <Resources />
