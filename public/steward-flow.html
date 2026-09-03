@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steward Flow | Precision Capital Allocation</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-zinc-950">
+
+    <!-- Header -->
+    <header class="w-full border-b border-zinc-800/80 px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="w-3 h-3 bg-emerald-500 rounded-sm"></div>
+            <span class="font-bold tracking-wider text-sm uppercase">Tech Arc // Steward Flow</span>
+        </div>
+        <span class="text-xs text-zinc-400 border border-zinc-800 px-2.5 py-1 rounded-full">v1.0 Core</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-12 w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        
+        <!-- Input Panel -->
+        <div class="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
+            <h2 class="text-lg font-semibold mb-6 text-zinc-200">1. Financial Inputs</h2>
+            
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-2">Gross Cash Received ($)</label>
+                    <input type="number" id="grossIncome" value="5000" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-emerald-500 transition-colors font-medium">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-zinc-400 mb-2">Direct Execution Costs ($)</label>
+                    <input type="number" id="execCosts" value="1200" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-emerald-500 transition-colors font-medium">
+                </div>
+
+                <div class="pt-4 border-t border-zinc-800/80 flex justify-between items-center">
+                    <span class="text-sm text-zinc-400">Net Disposable Cash (NDC):</span>
+                    <span id="ndcDisplay" class="text-xl font-bold text-emerald-400">$3,800.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output & Distribution Panel -->
+        <div class="space-y-6">
+            <div class="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
+                <h2 class="text-lg font-semibold mb-6 text-zinc-200">2. Allocation Matrix (NDC)</h2>
+                
+                <div class="space-y-4" id="bucketsContainer">
+                    <!-- Growth Engine -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-zinc-300 font-medium">Growth Engine (40%)</span>
+                            <span id="valGrowth" class="text-emerald-400 font-semibold">$1,520.00</span>
+                        </div>
+                        <div class="w-full bg-zinc-950 h-2 rounded-full overflow-hidden border border-zinc-800">
+                            <div id="barGrowth" class="bg-emerald-500 h-full w-[40%] transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Family Stability -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-zinc-300 font-medium">Family Stability (30%)</span>
+                            <span id="valFamily" class="text-emerald-400 font-semibold">$1,140.00</span>
+                        </div>
+                        <div class="w-full bg-zinc-950 h-2 rounded-full overflow-hidden border border-zinc-800">
+                            <div id="barFamily" class="bg-emerald-500 h-full w-[30%] transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Self / Honor -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-zinc-300 font-medium">Self / Honor (20%)</span>
+                            <span id="valSelf" class="text-emerald-400 font-semibold">$760.00</span>
+                        </div>
+                        <div class="w-full bg-zinc-950 h-2 rounded-full overflow-hidden border border-zinc-800">
+                            <div id="barSelf" class="bg-emerald-500 h-full w-[20%] transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Goodwill -->
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-zinc-300 font-medium">Goodwill (10%)</span>
+                            <span id="valGoodwill" class="text-emerald-400 font-semibold">$380.00</span>
+                        </div>
+                        <div class="w-full bg-zinc-950 h-2 rounded-full overflow-hidden border border-zinc-800">
+                            <div id="barGoodwill" class="bg-emerald-500 h-full w-[10%] transition-all duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavioral Nudge Box -->
+            <div id="nudgeBox" class="bg-emerald-950/20 border border-emerald-500/30 rounded-2xl p-4 text-xs text-emerald-300/90 leading-relaxed">
+                ⚡ <strong class="text-emerald-400">Behavioral Insight:</strong> Your Growth Engine allocation ($1,520) can fully cover your server and affiliate tech stack this month with room to scale.
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-zinc-800/80 py-4 text-center text-xs text-zinc-400">
+        Powered by Tech Arc Infrastructure &bull; <a href="https://techarc.icu" class="hover:text-emerald-400 transition-colors">techarc.icu</a>
+    </footer>
+
+    <!-- Script Engine -->
+    <script>
+        const grossInput = document.getElementById('grossIncome');
+        const execInput = document.getElementById('execCosts');
+        const ndcDisplay = document.getElementById('ndcDisplay');
+        
+        const valGrowth = document.getElementById('valGrowth');
+        const valFamily = document.getElementById('valFamily');
+        const valSelf = document.getElementById('valSelf');
+        const valGoodwill = document.getElementById('valGoodwill');
+        const nudgeBox = document.getElementById('nudgeBox');
+
+        function calculateStewardFlow() {
+            const gross = parseFloat(grossInput.value) || 0;
+            const costs = parseFloat(execInput.value) || 0;
+            const ndc = Math.max(0, gross - costs);
+
+            ndcDisplay.textContent = `$${ndc.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            const growth = ndc * 0.40;
+            const family = ndc * 0.30;
+            const self = ndc * 0.20;
+            const goodwill = ndc * 0.10;
+
+            valGrowth.textContent = `$${growth.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            valFamily.textContent = `$${family.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            valSelf.textContent = `$${self.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            valGoodwill.textContent = `$${goodwill.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            // Dynamic Nudge Logic
+            if (growth >= 1000) {
+                nudgeBox.innerHTML = `⚡ <strong class="text-emerald-400">Behavioral Insight:</strong> Your Growth Engine allocation ($${growth.toFixed(0)}) easily covers your core infrastructure and software subscriptions this cycle.`;
+            } else {
+                nudgeBox.innerHTML = `⚡ <strong class="text-emerald-400">Behavioral Insight:</strong> Focus on optimizing direct execution costs to expand your Growth Engine headroom.`;
+            }
+        }
+
+        grossInput.addEventListener('input', calculateStewardFlow);
+        execInput.addEventListener('input', calculateStewardFlow);
+    </script>
+</body>
+</html>
