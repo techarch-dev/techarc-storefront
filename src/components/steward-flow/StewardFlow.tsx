@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import { supabase } from '@/lib/supabase'; // Adjust path to match your project's supabase client location
 
 export default function StewardFlow() {
   const [grossIncome, setGrossIncome] = useState(5000);
   const [execCosts, setExecCosts] = useState(1200);
   
-  // Configurable Ratios (Default: 40 / 30 / 20 / 10)
   const [growthWeight, setGrowthWeight] = useState(40);
   const [familyWeight, setFamilyWeight] = useState(30);
   const [selfWeight, setSelfWeight] = useState(20);
@@ -16,6 +16,7 @@ export default function StewardFlow() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Core Math Calculations
   const gross = parseFloat(String(grossIncome)) || 0;
@@ -41,16 +42,35 @@ export default function StewardFlow() {
     setIsCustomMode(false);
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setIsSubscribed(true);
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setIsSubscribed(false);
-      setEmail('');
-      alert('Custom matrix profile saved & statement generated!');
-    }, 1500);
+    setErrorMessage('');
+
+    try {
+      const { error } = await supabase
+        .from('steward_leads')
+        .insert([{ email, source: 'steward-flow-matrix' }]);
+
+      if (error) {
+        // Handle duplicate email or constraint errors gracefully
+        if (error.code === '23505') {
+          setIsSubscribed(true); // Treat existing email as a successful unlock
+        } else {
+          throw error;
+        }
+      } else {
+        setIsSubscribed(true);
+      }
+
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setIsSubscribed(false);
+        setEmail('');
+      }, 2000);
+    } catch (err: any) {
+      setErrorMessage('Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -128,7 +148,6 @@ export default function StewardFlow() {
             </div>
 
             <div className="space-y-4">
-              {/* Growth Slider */}
               <div>
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-zinc-300">Growth Engine</span>
@@ -141,7 +160,6 @@ export default function StewardFlow() {
                 />
               </div>
 
-              {/* Family Slider */}
               <div>
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-zinc-300">Family Stability</span>
@@ -154,7 +172,6 @@ export default function StewardFlow() {
                 />
               </div>
 
-              {/* Self Slider */}
               <div>
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-zinc-300">Self / Honor</span>
@@ -167,7 +184,6 @@ export default function StewardFlow() {
                 />
               </div>
 
-              {/* Goodwill Slider */}
               <div>
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-zinc-300">Goodwill</span>
@@ -263,7 +279,7 @@ export default function StewardFlow() {
 
             {isSubscribed ? (
               <div className="bg-emerald-950/40 border border-emerald-500/50 rounded-xl p-4 text-center text-emerald-400 text-sm font-medium">
-                ✓ Profile upgraded successfully!
+                ✓ Profile saved to database successfully!
               </div>
             ) : (
               <form onSubmit={handleLeadSubmit} className="space-y-4">
@@ -275,11 +291,12 @@ export default function StewardFlow() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-emerald-500 text-sm"
                 />
+                {errorMessage && <p className="text-xs text-rose-400">{errorMessage}</p>}
                 <button 
                   type="submit"
                   className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold py-3 rounded-xl transition-colors text-sm cursor-pointer"
                 >
-                  Proceed to Secure Checkout ($1.99)
+                  Save Profile & Continue
                 </button>
               </form>
             )}
