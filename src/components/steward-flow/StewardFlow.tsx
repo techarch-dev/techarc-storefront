@@ -69,7 +69,8 @@ export default function StewardFlow() {
         setEmail('');
       }, 2000);
     } catch (err: any) {
-      setErrorMessage('Something went wrong. Please try again.');
+      console.error("SUPABASE ERROR DETAILS:", err);
+      setErrorMessage(err.message || 'Something went wrong. Please try again.');
     }
   };
 
