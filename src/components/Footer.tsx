@@ -1,4 +1,4 @@
-import { Cpu, Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Cpu, Github, Linkedin, Twitter, Mail, ArrowUpRight } from 'lucide-react';
 
 const QUICK_LINKS = [
   { label: 'Services', href: '#services' },
@@ -11,7 +11,7 @@ const QUICK_LINKS = [
 const SOLUTION_LINKS = [
   { label: 'Cloud Architecture', href: '#services' },
   { label: 'Biosecurity Systems', href: '#biosecurity' },
-  { label: 'Automation', href: '#services' },
+  { label: 'Steward Flow Calculator', href: 'https://stewardflow.techarc.icu', external: true },
   { label: 'Partner Vault', href: '#resources' },
 ];
 
@@ -79,9 +79,11 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-slate-400 hover:text-cyan-glow transition-colors"
+                    {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="text-sm text-slate-400 hover:text-cyan-glow transition-colors inline-flex items-center gap-1.5"
                   >
                     {link.label}
+                    {link.external && <ArrowUpRight className="h-3.5 w-3.5 text-cyan-glow/70" />}
                   </a>
                 </li>
               ))}
