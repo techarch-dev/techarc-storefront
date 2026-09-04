@@ -14,24 +14,24 @@ const SERVICES: Service[] = [
     icon: Cloud,
     title: 'Enterprise Web & Cloud Architecture',
     tagline:
-      'Custom web apps, server setup, WHM/cPanel optimization, and API integrations built for scale.',
-    features: ['Custom Web Apps', 'Server Setup', 'WHM/cPanel Optimization', 'API Integrations'],
+      'Custom web apps, WHM/cPanel optimization, and high-performance server operations powered by JaguarPC.',
+    features: ['Custom Web Apps', 'JaguarPC Hosting', 'WHM/cPanel Optimization', 'API Integrations'],
   },
   {
     id: 'biosecurity',
     icon: Droplets,
     title: 'Biosecurity & Smart AgTech Systems',
     tagline:
-      'Automated monitoring, tech-driven aquaculture, and biosecurity infrastructure solutions.',
+      'Automated monitoring, tech-driven aquaculture, and green biosecurity infrastructure solutions.',
     features: ['Automated Monitoring', 'Aquaculture Tech', 'Biosecurity Infrastructure', 'Smart Sensors'],
   },
   {
     id: 'consulting',
     icon: Workflow,
-    title: 'Strategic Tech Consulting & Automation',
+    title: 'Strategic Infrastructure & Automation',
     tagline:
-      'Workflow automation, secure email/DNS configurations, and digital growth engines.',
-    features: ['Workflow Automation', 'Secure Email/DNS', 'Digital Growth Engines', 'Tech Strategy'],
+      'Secure domain and DNS management via Namecheap, workflow automation, and custom document pipelines.',
+    features: ['Namecheap DNS & Domains', 'Workflow Automation', 'Document Formatting', 'Tech Strategy'],
   },
 ];
 
@@ -55,7 +55,7 @@ export function Services() {
           </h2>
           <p className="mt-4 text-slate-400 leading-relaxed">
             Every engagement is engineered around resilience, automation, and measurable
-            growth — from cloud infrastructure to biosecurity systems.
+            growth — from JaguarPC cloud infrastructure to Namecheap domain assets and biosecurity systems.
           </p>
         </div>
 
