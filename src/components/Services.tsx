@@ -1,4 +1,4 @@
-import { Database, Globe, Server, FileText, Cpu, ArrowRight, ExternalLink } from 'lucide-react';
+import { Database, Globe, Server, FileText, Cpu, ExternalLink } from 'lucide-react';
 
 export function Services() {
   const services = [
@@ -87,12 +87,12 @@ export function Services() {
               </p>
             </div>
             <a
-              href="https://stewardflow.techarc.icu"
+              href="http://localhost:5173"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 text-xs font-mono font-semibold text-cyan-glow hover:text-cyan-300 transition-colors"
             >
-              <span>Launch Calculator</span>
+              <span>Launch Local Build</span>
               <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
