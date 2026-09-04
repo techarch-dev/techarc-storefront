@@ -12,7 +12,7 @@ const SCOPES = [
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export function Contact() {
+export function contact() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
