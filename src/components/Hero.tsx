@@ -1,4 +1,4 @@
-import { ArrowRight, Boxes, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, Boxes, Globe, Server, ShieldCheck, Zap } from 'lucide-react';
 
 export function Hero() {
   return (
@@ -11,20 +11,20 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-glow opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-glow" />
             </span>
-            Enterprise Architecture & Biosecurity Systems
+            Enterprise Architecture & Cloud Hosting Systems
           </div>
         </div>
 
         {/* Headline */}
         <h1 className="reveal delay-1 mx-auto mt-8 max-w-4xl text-center font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl">
           Engineering Scalable Digital Infrastructure &{' '}
-          <span className="text-gradient">Biosecurity Tech Solutions.</span>
+          <span className="text-gradient">Secure Server Solutions.</span>
         </h1>
 
-        {/* Subheadline */}
+        {/* Subheadline — Updated to capture Namecheap & JaguarPC asset framework */}
         <p className="reveal delay-2 mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-slate-400">
-          We architect enterprise cloud systems, web platforms, and automated tech
-          infrastructures designed for maximum efficiency and modern growth.
+          We architect enterprise cloud systems, robust domain security via Namecheap, 
+          high-performance server operations powered by JaguarPC, and automated micro-SaaS platforms.
         </p>
 
         {/* CTAs */}
@@ -39,12 +39,12 @@ export function Hero() {
           </a>
         </div>
 
-        {/* Stat strip */}
+        {/* Stat strip — Upgraded to highlight server/uptime metrics */}
         <div className="reveal delay-4 mx-auto mt-20 grid max-w-3xl grid-cols-3 gap-4 sm:gap-8">
           {[
             { icon: Zap, value: '99.9%', label: 'Uptime SLA' },
-            { icon: ShieldCheck, value: 'Zero-Trust', label: 'Security Posture' },
-            { icon: Boxes, value: '24/7', label: 'Automated Ops' },
+            { icon: Server, value: 'Optimized', label: 'JaguarPC Hosting' },
+            { icon: Globe, value: 'Secured', label: 'Namecheap DNS' },
           ].map((stat) => (
             <div
               key={stat.label}
