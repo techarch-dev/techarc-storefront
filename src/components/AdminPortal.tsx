@@ -9,7 +9,7 @@ export function AdminPortal() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'TechArc26!') {
+    if (password === '#!') {
       setIsAuthenticated(true);
       setError(false);
     } else {
