@@ -104,10 +104,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/[0.06] pt-8">
-          <p className="font-mono text-xs text-slate-600">
-            © {new Date().getFullYear()} TechArch. All rights reserved.
-          </p>
+        {/* CORRECTED BOTTOM ROW */}
+        <div className="relative mt-14 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/[0.06] pt-8">
+          <div className="flex items-center">
+            <p className="font-mono text-xs text-slate-600">
+              © {new Date().getFullYear()} TechArch. All rights reserved.
+            </p>
+            {/* Stealth Admin Link */}
+            <a 
+              href="/portal" 
+              className="ml-4 font-mono text-xs text-white/[0.02] hover:text-white/20 select-none transition-colors duration-300"
+              title="Admin Access"
+            >
+              TA
+            </a>
+          </div>
+          
           <div className="flex items-center gap-2 font-mono text-xs text-slate-600">
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-glow animate-pulse" />
             Systems Online

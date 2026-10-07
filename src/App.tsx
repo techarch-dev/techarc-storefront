@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useReveal } from '@/hooks/useReveal';
 import { Background } from '@/components/Background';
 import { Header } from '@/components/Header';
@@ -9,7 +10,11 @@ import { Resources } from '@/components/Resources';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import StewardFlow from '@/components/steward-flow/StewardFlow';
-function App() {
+
+// Notice the curly braces here! This matches the 'export function' exactly.
+import { AdminPortal } from '@/components/AdminPortal';
+
+function MainSite() {
   useReveal();
 
   return (
@@ -20,7 +25,6 @@ function App() {
         <Hero />
         <Services />
         
-        {/* Steward Flow Micro-SaaS Tool Section */}
         <section id="steward-flow" className="py-12">
           <StewardFlow />
         </section>
@@ -32,6 +36,17 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path="/portal" element={<AdminPortal />} />
+      </Routes>
+    </Router>
   );
 }
 
