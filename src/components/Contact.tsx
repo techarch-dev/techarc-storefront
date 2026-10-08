@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react';
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 
 const SCOPES = [
   'Enterprise Web & Cloud',
@@ -34,21 +33,30 @@ export function Contact() {
       return;
     }
 
-    const { error } = await supabase.from('leads').insert({
-      name,
-      email,
-      project_scope,
-      message,
+    // Add the hidden field required by Netlify routing
+    formData.append('form-name', 'contact');
+
+    // Safely encode the data for Netlify's servers
+    const urlEncodedData = new URLSearchParams();
+    formData.forEach((value, key) => {
+      urlEncodedData.append(key, value.toString());
     });
 
-    if (error) {
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlEncodedData.toString(),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      setStatus('success');
+      form.reset();
+    } catch (error) {
       setStatus('error');
       setErrorMsg('Something went wrong. Please try again or email us directly.');
-      return;
     }
-
-    setStatus('success');
-    form.reset();
   };
 
   return (
@@ -112,7 +120,15 @@ export function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form 
+                  name="contact" 
+                  data-netlify="true" 
+                  onSubmit={handleSubmit} 
+                  className="space-y-5"
+                >
+                  {/* Hidden input required for Netlify inside React */}
+                  <input type="hidden" name="form-name" value="contact" />
+
                   <div className="grid sm:grid-cols-2 gap-5">
                     <Field label="Name" name="name" placeholder="Jane Doe" />
                     <Field label="Email" name="email" type="email" placeholder="jane@company.com" />
