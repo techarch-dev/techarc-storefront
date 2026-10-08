@@ -20,7 +20,7 @@ const SOCIAL_LINKS = [
   { icon: Github, href: 'https://github.com/techarch-dev', label: 'GitHub' },
   { icon: Link2, href: 'https://linktr.ee/thetecharchitect_', label: 'Linktree' },
   { icon: Instagram, href: 'https://www.instagram.com/thetecharchitect_/', label: '@thetecharchitect_' },
-  { icon: Mail, href: 'mailto:contact@techarc.icu', label: 'Email' },
+  { icon: Mail, href: 'mailto:moreinfo@techarc.icu', label: 'Email' },
 ];
 
 export function Footer() {
